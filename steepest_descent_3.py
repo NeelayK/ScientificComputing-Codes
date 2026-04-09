@@ -8,16 +8,16 @@ MAX_ALPHA_ITER = 50
 
 def f(x):
     x1, x2 = x
-    return x1**2 + (x2**2)/4 -1
+    return x1**2 + (x2**4)
 
 def grad_f(x):
     x1, x2 = x
-    return np.array([2*x1, x2/2])
+    return np.array([2*x1, 4*x2**3])
 
 def hessian_f(x):
     return np.array([
         [2, 0],
-        [0, 0.5]
+        [0, 12*x2**2]
     ])
 
 def compute_alpha_newton(x, p):
@@ -79,7 +79,7 @@ print("Minimum value:", f(x))
 x_vals = np.linspace(-20, 20, 1000)
 y_vals = np.linspace(-20, 20, 1000)
 X, Y = np.meshgrid(x_vals, y_vals)
-Z = X**2 + Y**2/4
+Z = X**2 + Y**4
 
 plt.figure()
 plt.contour(X, Y, Z, levels=50)
